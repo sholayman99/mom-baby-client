@@ -1,11 +1,11 @@
 import React from 'react';
 
-const CategoryList = () => {
+const ProductPage = () => {
     return (
         <div>
-            
+            product
         </div>
     );
 };
 
-export default CategoryList;
+export default ProductPage;
