@@ -43,7 +43,14 @@
   .lora-semibold{
     font-family: "Lora", serif;
     font-optical-sizing: auto;
-    font-weight: 600;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .lora-light{
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
     font-style: normal;
   }
   

@@ -5,11 +5,10 @@ import AppNavBar from './AppNavBar';
 
 const Main = () => {
     const location = useLocation()
-    const noHeaderFooter = location.pathname.includes('login') ||
-        location.pathname.includes('registration')
+
     return (
         <div>
-            {noHeaderFooter ||  <AppNavBar />}
+            <AppNavBar />
             <Outlet />
         </div>
     );

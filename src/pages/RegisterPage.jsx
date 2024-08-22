@@ -1,0 +1,13 @@
+/* eslint-disable no-unused-vars */
+import React from 'react';
+import Register from "../components/Auth/Register"
+
+const RegisterPage = () => {
+    return (
+        <>
+         <Register/>   
+        </>
+    );
+};
+
+export default RegisterPage;
