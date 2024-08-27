@@ -21,7 +21,9 @@ export default {
           "warning":"#facc15",
           "base-100":"#FFFFFF"
         },
+       
       },
+      
     ],
   },
   plugins: [require("daisyui")],

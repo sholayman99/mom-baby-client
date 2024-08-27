@@ -18,7 +18,7 @@ const Login = () => {
           Account
         </h3>
         <div className="flex items-center justify-center gap-2 text-info lora-light">
-          <Link className="hover:text-secondary" to={"/"}>Home</Link>
+          <Link className="hover:text-secondary"p to={"/"}>Home</Link>
           <span>/</span>
           <p>Account</p>
         </div>
@@ -62,7 +62,7 @@ const Login = () => {
             </Link>
           </span>
           <div className="bg-info w-full max-w-sm h-[1px]"></div>
-          <Link className="text-lg text-info underline hover:text-secondary">
+          <Link to={'/'} className="text-lg text-info underline hover:text-secondary">
             Return to Home
           </Link>
         </div>

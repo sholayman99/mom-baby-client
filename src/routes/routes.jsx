@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage";
 import ProductPage from "../pages/ProductPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
+import VerifyAccount from "../components/Auth/VerifyAccount";
 
 
 
@@ -28,6 +29,10 @@ const routes = createBrowserRouter([
            {
             path:'/login',
             element:<LoginPage />
+           },
+           {
+            path:'/otp-verify',
+            element:<VerifyAccount />
            },
         ]
     }
