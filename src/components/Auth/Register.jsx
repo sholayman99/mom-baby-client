@@ -12,6 +12,7 @@ import {
   isPassword,
 } from "../../utility/formHelper";
 import { useSelector } from "react-redux";
+import ButtonLoader from "../../layout/Main/ButtonLoader";
 
 const RegisterPage = () => {
   const loader = useSelector((state) => state.settings.loader);
@@ -57,7 +58,7 @@ const RegisterPage = () => {
           photo
         );
         if (res === true) {
-          navigate("/login");
+          navigate("/otp-verify");
         }
       }
     }
@@ -77,28 +78,28 @@ const RegisterPage = () => {
           <p>Create Account</p>
         </div>
       </section>
-      <section className=" lg:mt-16 poppins-regular">
+      <section className=" lg:mt-12 mt-8 poppins-regular">
         <div className="flex flex-col justify-center items-center gap-5 form-control text-neutral">
           <div className="form-control">
             <input
-              className=" p-4 border border-gray-300 w-full max-w-sm tracking-wide focus:outline-none
-             rounded-sm text-lg"
+              className=" lg:p-3 p-2 border border-gray-300 w-full lg:max-w-sm max-w-xs tracking-wide focus:outline-none
+             rounded-sm lg:text-lg text-md"
               ref={(input) => (nameRef = input)}
               placeholder="Full Name"
             />
           </div>
           <div className="form-control">
             <input
-              className=" p-4 border border-gray-300 w-full max-w-sm tracking-wide focus:outline-none
-             rounded-sm text-lg"
+              className=" lg:p-3 p-2 border  border-gray-300 w-full lg:max-w-sm max-w-xs tracking-wide focus:outline-none
+             rounded-sm lg:text-lg text-md"
               ref={(input) => (emailRef = input)}
               placeholder="Email"
             />
           </div>
           <div className="form-control relative">
             <input
-              className=" p-4 border border-gray-300 w-full max-w-sm tracking-wide focus:outline-none
-             rounded-sm text-lg"
+              className=" lg:p-3 p-2 border border-gray-300 w-full lg:max-w-sm max-w-xs tracking-wide focus:outline-none
+             rounded-sm lg:text-lg text-md"
               ref={(input) => (passRef = input)}
               type={passType}
               placeholder="Password"
@@ -106,15 +107,15 @@ const RegisterPage = () => {
 
             <button
               onClick={togglePasswordType}
-              className="absolute right-2 top-5"
+              className="absolute right-2 lg:top-5 top-3"
             >
               {passType === "password" ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
           <div className="form-control">
             <input
-              className=" p-4 border border-gray-300 w-full max-w-sm tracking-wide focus:outline-none
-             rounded-sm text-lg"
+              className=" lg:p-3 p-2 border border-gray-300 w-full lg:max-w-sm max-w-xs tracking-wide focus:outline-none
+             rounded-sm lg:text-lg text-md"
               type="password"
               ref={(input) => (confirmPassRef = input)}
               placeholder="Confirm Password"
@@ -122,8 +123,8 @@ const RegisterPage = () => {
           </div>
           <div className="form-control">
             <input
-              className=" p-4 border border-gray-300 w-full max-w-sm tracking-wide focus:outline-none
-             rounded-sm text-lg"
+              className=" lg:p-3 p-2 border border-gray-300 w-full lg:max-w-sm max-w-xs tracking-wide focus:outline-none
+             rounded-sm lg:text-lg text-md"
               ref={(input) => (mobileRef = input)}
               placeholder="Mobile"
             />
@@ -131,19 +132,16 @@ const RegisterPage = () => {
         </div>
         <div className="flex flex-col justify-center items-center gap-3 my-5">
           {loader === "show" ? (
-            <div className="flex items-center justify-center gap-1 bg-primary py-2.5 poppins-regular rounded-full w-full max-w-sm text-base-100 text-lg">
-           <span className="loading loading-infinity loading-lg"></span>
-              <div>Loading</div>
-            </div>
+          <ButtonLoader />
           ) : (
             <button
               onClick={onRegistration}
-              className="bg-primary py-4 poppins-regular rounded-full hover:bg-secondary w-full max-w-sm text-base-100 text-lg"
+              className="bg-primary p-2 lg:p-3 poppins-regular rounded-full hover:bg-secondary w-full lg:max-w-sm max-w-xs text-base-100 text-lg"
             >
               Create
             </button>
           )}
-          <span className="text-md text-info">
+          <span className="lg:text-lg text-sm text-info">
             Already has an account?{" "}
             <Link
               to={"/login"}
@@ -155,7 +153,7 @@ const RegisterPage = () => {
           <div className="bg-info w-full max-w-sm h-[1px]"></div>
           <Link
             to={"/"}
-            className="text-lg text-info underline hover:text-secondary"
+            className="lg:text-lg text-md text-info underline hover:text-secondary"
           >
             Return to Home
           </Link>

@@ -1,11 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import ReactCodeInput from "react-code-input";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { errorMsg } from "../../utility/formHelper";
+import { otpVerifyRequest } from "../../apiRequest/userRequest";
+import ButtonLoader from "../../layout/Main/ButtonLoader";
 
 const VerifyAccount = () => {
   const loader = useSelector((state) => state.settings.loader);
+  const [otp, setOtp] = useState("");
+  const navigate = useNavigate();
   let defaultInputStyle = {
     fontFamily: "monospace",
     MozAppearance: "textfield",
@@ -15,11 +20,22 @@ const VerifyAccount = () => {
     borderRadius: "3px",
     height: "45px",
     fontSize: "32px",
-    border: "2px solid #EF7B84",
+    border: "1px solid rgb(209 213 219)",
     boxSizing: "border-box",
-    color: "black",
+    color: "#717173",
     backgroundColor: "white",
     outline: "none",
+  };
+
+  const onOtpSubmit = async () => {
+    if (!otp) {
+      errorMsg("please!provide an otp code");
+    } else {
+      let res = await otpVerifyRequest(otp);
+      if (res === true) {
+        navigate("/login");
+      }
+    }
   };
 
   return (
@@ -36,7 +52,7 @@ const VerifyAccount = () => {
           <p>Verify Account</p>
         </div>
       </section>
-      <section className="flex flex-col gap-3 justify-center items-center min-h-[50vh]">
+      <section className="flex flex-col gap-3 justify-center items-center lg:mt-12 mt-8">
         <p className="poppins-regular text-info">
           You will get an <b>OTP</b> via <b>EMAIL</b>
         </p>
@@ -49,13 +65,12 @@ const VerifyAccount = () => {
           onChange={(value) => setOtp(value)}
         />
         {loader === "show" ? (
-          <div className="flex items-center justify-center gap-1 bg-primary py-2.5 poppins-regular rounded-full w-full max-w-xs text-base-100 text-lg">
-            <span className="loading loading-infinity loading-lg"></span>
-            <div>Loading</div>
-          </div>
+          <ButtonLoader />
         ) : (
           <button
-            className="bg-primary py-3 poppins-regular rounded-full hover:bg-secondary w-full max-w-xs text-base-100 text-lg"
+            className="bg-primary py-3 poppins-regular rounded-full hover:bg-secondary w-full max-w-xs
+             text-base-100 text-lg"
+            onClick={onOtpSubmit}
           >
             Submit
           </button>
