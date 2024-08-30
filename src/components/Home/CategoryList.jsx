@@ -16,24 +16,28 @@ const CategoryList = () => {
     return <CategorySkeleton />;
   } else {
     return (
-      <main className="my-24">
-        <div className="flex flex-col items-center justify-center gap-3 mb-14">
-          <h2 className="lora-semibold text-secondary lg:text-4xl text-2xl">
+      <main className="mt-20">
+        <div className="flex flex-col items-center justify-center gap-2 mb-20">
+          <h2 className="lora-semibold text-secondary lg:text-4xl text-2xl uppercase">
             Top Categories
           </h2>
-          <p className="uppercase lg:text-4xl text-2xl text-info poppins-semibold">
+          <p className="lg:text-xl text-lg text-neutral poppins-regular">
             Choose your category
           </p>
         </div>
         <section className="grid lg:grid-cols-4 grid-cols-2 gap-10 lg:px-10 px-5">
           {categoryList.map((item, i) => {
             return (
-              <Link to={"/"}
+              <Link
+                to={"/"}
                 key={i}
                 className="shadow p-4 rounded flex items-center flex-col gap-1 max-w-xs
                  hover:bg-primary text-primary hover:text-base-100 hover:transition ease-in-out delay-100"
               >
-                <img className="lg:w-28 lg:h-28 w-16 h-16 rounded-full" src={item.image} />
+                <img
+                  className="lg:w-28 lg:h-28 w-16 h-16 rounded-full"
+                  src={item.image}
+                />
                 <h3 className="poppins-medium lg:text-lg text-sm">
                   {item["categoryName"]}
                 </h3>
