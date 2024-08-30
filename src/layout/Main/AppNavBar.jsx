@@ -2,14 +2,22 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline, IoSettingsOutline } from "react-icons/io5";
 import { FaRegHeart, FaUserCircle } from "react-icons/fa";
+import { CiUser } from "react-icons/ci";
+import { FiUser } from "react-icons/fi";
+import { MdLogout } from "react-icons/md";
 
 const AppNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   const navList = (
@@ -32,7 +40,7 @@ const AppNavBar = () => {
             : "text-neutral text-[16px] poppins-medium hover:text-secondary"
         }
       >
-       Products
+        Products
       </NavLink>
     </>
   );
@@ -49,12 +57,49 @@ const AppNavBar = () => {
       >
         <FaRegHeart />
       </NavLink>
-      <NavLink
-        to={"/login"}
-        className={"hover:text-secondary text-neutral text-xl lg:text-2xl"}
-      >
-        <FaUserCircle />
-      </NavLink>
+      {/* User Icon and Dropdown */}
+      <div className="dropdown dropdown-end z-50">
+        <div
+          tabIndex={0}
+          role="button"
+          className=" hover:text-secondary text-neutral text-xl lg:text-2xl "
+        >
+          <FaUserCircle />
+        </div>
+        <div
+          tabIndex={0}
+          className="dropdown-content menu bg-base-100 z-[1] mt-5 border border-secondary
+           w-52 p-0 shadow rounded"
+        >
+          <section className="flex items-center gap-3 p-3">
+            <div className="avatar">
+              <div className="w-12 rounded-full">
+                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              </div>
+            </div>
+            <div>
+              <h6 className="poppins-medium text-primary">Md. Sholayman</h6>
+              <p className="poppins-light text-info text-xs">User</p>
+            </div>
+          </section>
+          <div className="h-[0.5px] bg-gray-300 my-1"></div>
+          <section className="p-3 flex flex-col gap-3">
+            <div className="flex items-center gap-2 text-md poppins-medium text-neutral">
+              <p className="text-xl"><FiUser /></p>
+              <Link className="hover:text-secondary" to={"/"}>Dashboard</Link>
+            </div>
+            <div className="flex items-center gap-2 text-md poppins-medium text-neutral">
+              <p className="text-xl"><IoSettingsOutline /></p>
+              <Link className="hover:text-secondary" to={"/"}>Account Settings</Link>
+            </div>
+          </section>
+          <div className="h-[0.5px] bg-gray-300 my-1"></div>
+           <div className="flex items-center gap-2 text-md poppins-medium text-neutral p-3">
+              <p className="text-xl"><MdLogout /></p>
+              <button className="hover:text-secondary" to={"/"}>Logout</button>
+            </div>
+        </div>
+      </div>
     </>
   );
 
@@ -112,14 +157,14 @@ const AppNavBar = () => {
             <img src={logo} className="lg:w-36 w-28" alt="logo" />
           </Link>
           {/* navList */}
-          <div className="hidden lg:flex space-x-10 w-[50%]">
+          <div className="hidden lg:flex justify-between w-[50%]">
             <div className="flex items-center space-x-6">{navList}</div>
             {/* search-field */}
-            <div className="lg:flex hidden border border-gray-300 rounded-lg overflow-hidden  max-w-xs w-full">
+            <div className="lg:flex hidden border border-gray-300 rounded-full overflow-hidden  max-w-xs w-full">
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full px-2.5 py-2 focus:outline-none text-neutral"
+                className="w-full px-3 py-2 focus:outline-none text-neutral"
               />
               <button className="bg-primary hover:bg-secondary text-base-100 px-4 py-1">
                 <svg
