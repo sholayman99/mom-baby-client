@@ -16,7 +16,7 @@ const CategoryList = () => {
     return <CategorySkeleton />;
   } else {
     return (
-      <main className="mt-20">
+      <main className="lg:mt-24 mt-16">
         <div className="flex flex-col items-center justify-center gap-2 mb-20">
           <h2 className="lora-semibold text-secondary lg:text-4xl text-2xl uppercase">
             Top Categories

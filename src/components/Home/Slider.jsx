@@ -17,7 +17,7 @@ const SwiperComponent = () => {
     })();
   }, []);
 
-  const sliderList = useSelector((state) => state.sliders.value);
+  const sliderList = useSelector((state) => state.features.value);
 
   if (sliderList.length === 0) {
     return <SliderSkeleton />;
