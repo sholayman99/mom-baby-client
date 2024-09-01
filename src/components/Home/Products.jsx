@@ -8,7 +8,7 @@ import ProductSkeleton from "../../skeletons/ProductSkeleton";
 
 const Products = () => {
   const remarkProduct = useSelector((state) => state.products.remarkProduct);
-  console.log(remarkProduct);
+
   return (
     <main className="lg:mt-24 mt-16">
       <div className="flex flex-col items-center justify-center gap-2 mb-10">
@@ -21,7 +21,7 @@ const Products = () => {
       </div>
 
       <section className="lg:px-10 px-5">
-        <div className="flex h-screen w-full justify-center">
+        <div className="flex min-h-screen w-full justify-center">
           <div className="w-full max-w-5xl">
             <TabGroup>
               <TabList
@@ -74,8 +74,8 @@ const Products = () => {
                   {remarkProduct.length === 0 ? (
                     <ProductSkeleton />
                   ) : (
-                    <div className="grid grid-cols-2 lg:grid-cols-4">
-                      {remarkProduct.map((item, i) => {
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+                    {remarkProduct.map((item, i) => {
                         let price = (
                           <p className="text-success my-1 lg:text-lg text-md">
                             {" "}
@@ -84,9 +84,9 @@ const Products = () => {
                         );
                         if (item["discount"]) {
                           price = (
-                            <p className="text-success my-1 lg:text-lg text-sm">
+                            <p className="text-success my-1 lg:text-lg text-xs">
                               ${item["discountPrice"]}
-                              <strike className="ml-1.5 lg:text-lg text-sm text-info">
+                              <strike className="ml-1.5 lg:text-lg text-xs text-info">
                                 ${item["price"]}
                               </strike>
                             </p>
@@ -98,12 +98,12 @@ const Products = () => {
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
                           >
-                            <img className="p-3 " src={item.image} />
+                            <img className="p-3 h-52 w-48 lg:h-72 lg:w-62 " src={item.image} />
                             <div
                               className="bg-secondary/10 w-full flex items-center
-                              justify-center flex-col py-4 poppins-regular"
+                              justify-center flex-col p-2 poppins-regular"
                             >
-                              <h4 className="text-neutral text-center poppins-medium lg:text-lg text-sm">
+                              <h4 className="text-neutral text-center poppins-medium lg:text-lg text-xs">
                                 {item["title"]}
                               </h4>
                               {price}

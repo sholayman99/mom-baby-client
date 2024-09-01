@@ -1,16 +1,18 @@
 // src/components/Navbar.js
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import { IoCartOutline, IoSettingsOutline } from "react-icons/io5";
 import { FaRegHeart, FaUserCircle } from "react-icons/fa";
-import { CiUser } from "react-icons/ci";
 import { FiUser } from "react-icons/fi";
 import { MdLogout } from "react-icons/md";
+
 
 const AppNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [keyword,setKeyword] = useState("");
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -19,6 +21,16 @@ const AppNavBar = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  const onSearch = ()=>{
+    if(keyword.length>0){
+      navigate(`/product-by-keyword/${keyword}`);
+  }
+  else {
+      // errorMsg("Search field can't be empty!")
+      navigate('/')
+  }
+  }
 
   const navList = (
     <>
@@ -165,8 +177,9 @@ const AppNavBar = () => {
                 type="text"
                 placeholder="Search..."
                 className="w-full px-3 py-2 focus:outline-none text-neutral"
+                onChange={(e)=>setKeyword(e.target.value)}
               />
-              <button className="bg-primary hover:bg-secondary text-base-100 px-4 py-1">
+              <button onClick={onSearch} className="bg-primary hover:bg-secondary text-base-100 px-4 py-1">
                 <svg
                   className="w-5 h-5"
                   fill="none"
@@ -197,12 +210,12 @@ const AppNavBar = () => {
           <div className="flex flex-col pt-2 pb-3 gap-2.5 px-3.5 max-w-xs">
             {navList}
             <div className="flex border border-gray-300 rounded-lg overflow-hidden  max-w-xs">
-              <input
+              <input onChange={(e)=>setKeyword(e.target.value)}
                 type="text"
                 placeholder="Search..."
                 className="w-full px-2.5 py-1.5 focus:outline-none"
               />
-              <button className="bg-primary hover:bg-secondary text-base-100 px-2 py-1">
+              <button onClick={onSearch} className="bg-primary hover:bg-secondary text-base-100 px-2 py-1">
                 <svg
                   className="w-5 h-5"
                   fill="none"

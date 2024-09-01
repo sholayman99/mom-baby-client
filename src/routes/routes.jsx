@@ -5,6 +5,7 @@ import ProductPage from "../pages/ProductPage";
 import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import VerifyAccount from "../components/Auth/VerifyAccount";
+import ProductByKeywordPage from "../pages/ProductByKeywordPage";
 
 
 
@@ -34,6 +35,10 @@ const routes = createBrowserRouter([
             path:'/otp-verify',
             element:<VerifyAccount />
            },
+           {
+           path:'product-by-keyword/:keyword',
+           element:<ProductByKeywordPage />
+           }
         ]
     }
 ]);
