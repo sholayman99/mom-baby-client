@@ -93,7 +93,7 @@ const Products = () => {
                           );
                         }
                         return (
-                          <Link
+                          <Link to={"/"}
                             key={i}
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
@@ -249,7 +249,7 @@ const Products = () => {
               </TabPanels>
             </TabGroup>
             <div className="flex justify-end items-center">
-              <Link
+              <Link to="/products"
                 className="flex items-center text-primary  border-primary py-1 px-3 gap-2
             hover:border  rounded-md mt-5"
               >

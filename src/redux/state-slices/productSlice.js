@@ -24,6 +24,12 @@ export const productSlice = createSlice({
     setProductByKeyword: (state, action) => {
       state.productList = action.payload;
     },
+    setProductByFilter:(state,action)=>{
+      state.productList = action.payload;
+    },
+    setProductByCategory:(state,action)=>{
+      state.productList = action.payload;
+    },
   },
 });
 
@@ -33,5 +39,7 @@ export const {
   setRemarkProduct,
   setProductList,
   setProductByKeyword,
+  setProductByFilter,
+  setProductByCategory
 } = productSlice.actions;
 export default productSlice.reducer;

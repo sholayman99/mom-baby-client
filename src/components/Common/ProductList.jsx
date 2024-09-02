@@ -2,33 +2,48 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   categoryListRequest,
-  productListRequest,
+  productByFilterRequest,
   subCategoryListRequest,
 } from "../../apiRequest/productRequest";
 import { Link } from "react-router-dom";
 import ProductSkeleton from "../../skeletons/ProductSkeleton";
 
 const ProductList = () => {
-
-  useEffect(() => {
-    (async () => {
-      await categoryListRequest();
-      await subCategoryListRequest();
-    })();
-
-  }, []);
-
   const categoryList = useSelector((state) => state.products.categoryList);
   const subCategoryList = useSelector(
     (state) => state.products.subCategoryList
   );
   const productList = useSelector((state) => state.products.productList);
- 
+
+  const [filter, setFilter] = useState({
+    subCategoryID: "",
+    categoryID: "",
+    priceMin: "",
+    priceMax: "",
+  });
+
+
+  const inputOnChange=async(key,value)=>{
+    setFilter((data)=>({
+      ...data,
+      [key]:value
+    }))
+  }
+
+  useEffect(() => {
+    (async () => {
+      await categoryListRequest();
+      await subCategoryListRequest();
+      let isEveryFilterPropertyEmpty=Object.values(filter).every(value => value==="");
+      !isEveryFilterPropertyEmpty?await productByFilterRequest(1,10,filter):<></>;
+    })();
+  }, [filter]);
+
   return (
     <main className="">
       <div className="flex flex-col lg:flex-row lg:px-5 lg:py-10 p-3 gap-10">
-        <section className="grid grid-cols-2 lg:grid-cols-1 lg:gap-16 gap-5 min-w-[200px]">
-          <select
+        <section className="grid grid-cols-2 lg:grid-cols-1  gap-5 min-w-[200px]">
+          <select value={filter.categoryID} onChange={async(e)=>await inputOnChange("categoryID",e.target.value)}
             className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500
       px-4 py-1 h-10 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs"
           >
@@ -36,14 +51,14 @@ const ProductList = () => {
             {categoryList.map((item, i) => {
               return (
                 <>
-                  <option className="text-info" key={i}>
+                  <option value={item['_id']} className="text-info" key={i}>
                     {item["categoryName"]}
                   </option>
                 </>
               );
             })}
           </select>
-          <select
+          <select value={filter.subCategoryID} onChange={async(e)=>await inputOnChange("subCategoryID",e.target.value)}
             className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500
       px-4 py-1 h-10 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs "
           >
@@ -51,32 +66,32 @@ const ProductList = () => {
             {subCategoryList.map((item, i) => {
               return (
                 <>
-                  <option className="text-info" key={i}>
+                  <option value={item['_id']} className="text-info" key={i}>
                     {item["subCategoryName"]}
                   </option>
                 </>
               );
             })}
           </select>
-          <div>
+          <div className="form-control">
             <label className="block text-gray-600 text-xs poppins-semibold mb-1">
-              Max Price:$
+              Max Price:${filter.priceMax}
             </label>
-            <input
+            <input value={filter.priceMax} onChange={async(e)=>await inputOnChange("priceMax",e.target.value)}
               type="range"
               min={"0"}
               max={"5000"}
-              step={"50"}
+              step={"100"}
               className="w-full lg:h-2.5 h-1.5  rounded-lg appearance-none cursor-pointer bg-secondary"
             />
             <label className="block text-gray-600 text-xs poppins-semibold mb-1 mt-3">
-              Min Price:$
+              Min Price:${filter.priceMin}
             </label>
-            <input
+            <input value={filter.priceMin} onChange={async(e)=>await inputOnChange("priceMin",e.target.value)}
               type="range"
               min={"0"}
               max={"5000"}
-              step={"50"}
+              step={"100"}
               className="w-full lg:h-2.5 h-1.5 bg-secondary rounded-lg appearance-none cursor-pointer"
             />
           </div>

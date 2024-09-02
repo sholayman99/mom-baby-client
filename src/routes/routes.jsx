@@ -6,6 +6,7 @@ import RegisterPage from "../pages/RegisterPage";
 import LoginPage from "../pages/LoginPage";
 import VerifyAccount from "../components/Auth/VerifyAccount";
 import ProductByKeywordPage from "../pages/ProductByKeywordPage";
+import ProductByCategoryPage from "../pages/ProductByCategoryPage";
 
 
 
@@ -38,6 +39,10 @@ const routes = createBrowserRouter([
            {
            path:'product-by-keyword/:keyword',
            element:<ProductByKeywordPage />
+           },
+           {
+            path:'product-by-category/:categoryID',
+            element:<ProductByCategoryPage />
            }
         ]
     }

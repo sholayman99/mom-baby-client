@@ -29,7 +29,7 @@ const CategoryList = () => {
           {categoryList.map((item, i) => {
             return (
               <Link
-                to={"/"}
+              to={`/product-by-category/${item['_id']}`}
                 key={i}
                 className="shadow p-4 rounded flex items-center flex-col gap-1 max-w-xs
                  hover:bg-primary text-primary hover:text-base-100 hover:transition ease-in-out delay-100"
