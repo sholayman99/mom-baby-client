@@ -7,7 +7,7 @@ const ProductByCategoryPage = () => {
     const {categoryID} = useParams();
     useEffect(() => {
         (async () => {
-          await productByCatgegoryRequest(1,10,categoryID);
+          await productByCatgegoryRequest(1,2,categoryID);
         })();
       },[]);
     return (

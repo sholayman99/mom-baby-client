@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCategory, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setSubCategory } from "../redux/state-slices/productSlice";
+import { setCategory, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setSubCategory, setTotal } from "../redux/state-slices/productSlice";
 import store from "../redux/store/store";
 import { errorMsg } from "../utility/formHelper";
 
@@ -46,6 +46,7 @@ export async function productListRequest(pageNo,perPage){
       let res = await axios.get(`/productList/${pageNo}/${perPage}`);
       if(res.status === 200){
          store.dispatch(setProductList(res.data['data']));
+         store.dispatch(setTotal(res.data['total']));
       }
  }
  catch(e){
@@ -58,6 +59,7 @@ export async function productByKeywordRequest(pageNo,perPage,keyword){
       let res = await axios.get(`/productByKeyword/${pageNo}/${perPage}/${keyword}`);
       if(res.status === 200){
          store.dispatch(setProductByKeyword(res.data['data']));
+         store.dispatch(setTotal(res.data['total']));
       }
  }
  catch(e){
@@ -66,11 +68,11 @@ export async function productByKeywordRequest(pageNo,perPage,keyword){
 }
 
 export async function productByFilterRequest(pageNo,perPage,postBody){
-   console.log(postBody)
    try{
       let res = await axios.post(`/productByFilter/${pageNo}/${perPage}`,postBody);
       if(res.status === 200){
          store.dispatch(setProductByFilter(res.data['data']));
+         store.dispatch(setTotal(res.data['total']));
       }
  }
  catch(e){

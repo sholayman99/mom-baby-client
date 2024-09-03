@@ -7,6 +7,7 @@ export const productSlice = createSlice({
     subCategoryList: [],
     remarkProduct: [],
     productList: [],
+    total:[]
   },
   reducers: {
     setCategory: (state, action) => {
@@ -30,6 +31,10 @@ export const productSlice = createSlice({
     setProductByCategory:(state,action)=>{
       state.productList = action.payload;
     },
+    setTotal:(state,action)=>{
+      state.total = action.payload;
+  },
+
   },
 });
 
@@ -40,6 +45,7 @@ export const {
   setProductList,
   setProductByKeyword,
   setProductByFilter,
+  setTotal,
   setProductByCategory
 } = productSlice.actions;
 export default productSlice.reducer;

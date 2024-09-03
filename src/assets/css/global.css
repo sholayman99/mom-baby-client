@@ -52,4 +52,53 @@
     font-weight: 300;
     font-style: normal;
   }
+
+
+  .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+.page {
+    margin-right: 0.5rem;
+    padding: 0.25rem 0.8rem;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 16px;
+}
+.page:hover {
+    background-color: #68B5D2;
+    color: white;
+}
+.active-btn {
+    background-color: #EF7B84;
+    color: white;
+}
+.prev,
+.next {
+    margin-right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.prev:hover,
+.next:hover {
+  background-color: #68B5D2;
+  color: white;
+}
+
+.title{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 1px;
+    margin-top: 10px;
+}
+
+.text{
+    color: #514f4f;
+}
   

@@ -5,7 +5,7 @@ import { productListRequest } from "../apiRequest/productRequest";
 const ProductPage = () => {
   useEffect(() => {
     (async () => {
-      await productListRequest(1, 10);
+      await productListRequest(1, 2);
     })();
   }, []);
   return (

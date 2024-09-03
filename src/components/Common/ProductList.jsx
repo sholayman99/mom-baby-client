@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   categoryListRequest,
+  productByCatgegoryRequest,
   productByFilterRequest,
+  productByKeywordRequest,
+  productListRequest,
   subCategoryListRequest,
 } from "../../apiRequest/productRequest";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ProductSkeleton from "../../skeletons/ProductSkeleton";
+import ReactPaginate from "react-paginate";
 
 const ProductList = () => {
+  const {categoryID,keyword} = useParams();
   const categoryList = useSelector((state) => state.products.categoryList);
   const subCategoryList = useSelector(
     (state) => state.products.subCategoryList
   );
   const productList = useSelector((state) => state.products.productList);
+  const total = useSelector((state) => state.products.total);
+  console.log(total.length)
 
   const [filter, setFilter] = useState({
     subCategoryID: "",
@@ -22,20 +29,41 @@ const ProductList = () => {
     priceMax: "",
   });
 
-
-  const inputOnChange=async(key,value)=>{
-    setFilter((data)=>({
+  const inputOnChange = async (key, value) => {
+    setFilter((data) => ({
       ...data,
-      [key]:value
-    }))
+      [key]: value,
+    }));
+  };
+
+
+  const handlePageClick=async(event)=>{
+   if(keyword){
+    await productByKeywordRequest(event.selected+1,2,keyword);
+   }
+   else if(categoryID){
+    await productByCatgegoryRequest(event.selected+1,2,categoryID);
+   }
+   else if(filter){
+    await productByFilterRequest(event.selected+1,2,filter);
+   }
+   else{
+    await productListRequest(event.selected+1,2)
+   }
   }
 
   useEffect(() => {
     (async () => {
       await categoryListRequest();
       await subCategoryListRequest();
-      let isEveryFilterPropertyEmpty=Object.values(filter).every(value => value==="");
-      !isEveryFilterPropertyEmpty?await productByFilterRequest(1,10,filter):<></>;
+      let isEveryFilterPropertyEmpty = Object.values(filter).every(
+        (value) => value === ""
+      );
+      !isEveryFilterPropertyEmpty ? (
+        await productByFilterRequest(1, 2, filter)
+      ) : (
+        <></>
+      );
     })();
   }, [filter]);
 
@@ -43,30 +71,38 @@ const ProductList = () => {
     <main className="">
       <div className="flex flex-col lg:flex-row lg:px-5 lg:py-10 p-3 gap-10">
         <section className="grid grid-cols-2 lg:grid-cols-1  gap-5 min-w-[200px]">
-          <select value={filter.categoryID} onChange={async(e)=>await inputOnChange("categoryID",e.target.value)}
+          <select
+            value={filter.categoryID}
+            onChange={async (e) =>
+              await inputOnChange("categoryID", e.target.value)
+            }
             className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500
-      px-4 py-1 h-10 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs"
+      lg:px-4 px-3  lg:h-10 h-8 lg:pr-8 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs"
           >
             <option>Choose Category</option>
             {categoryList.map((item, i) => {
               return (
                 <>
-                  <option value={item['_id']} className="text-info" key={i}>
+                  <option value={item["_id"]} className="text-info" key={i}>
                     {item["categoryName"]}
                   </option>
                 </>
               );
             })}
           </select>
-          <select value={filter.subCategoryID} onChange={async(e)=>await inputOnChange("subCategoryID",e.target.value)}
+          <select
+            value={filter.subCategoryID}
+            onChange={async (e) =>
+              await inputOnChange("subCategoryID", e.target.value)
+            }
             className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500
-      px-4 py-1 h-10 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs "
+      lg:px-4 px-3 py-1 lg:h-10 h-8 lg:pr-8 pr-6 rounded shadow leading-tight focus:outline-none focus:shadow-outline lg:text-[16px] text-xs "
           >
             <option>Choose SubCategory</option>
             {subCategoryList.map((item, i) => {
               return (
                 <>
-                  <option value={item['_id']} className="text-info" key={i}>
+                  <option value={item["_id"]} className="text-info" key={i}>
                     {item["subCategoryName"]}
                   </option>
                 </>
@@ -77,7 +113,11 @@ const ProductList = () => {
             <label className="block text-gray-600 text-xs poppins-semibold mb-1">
               Max Price:${filter.priceMax}
             </label>
-            <input value={filter.priceMax} onChange={async(e)=>await inputOnChange("priceMax",e.target.value)}
+            <input
+              value={filter.priceMax}
+              onChange={async (e) =>
+                await inputOnChange("priceMax", e.target.value)
+              }
               type="range"
               min={"0"}
               max={"5000"}
@@ -87,7 +127,11 @@ const ProductList = () => {
             <label className="block text-gray-600 text-xs poppins-semibold mb-1 mt-3">
               Min Price:${filter.priceMin}
             </label>
-            <input value={filter.priceMin} onChange={async(e)=>await inputOnChange("priceMin",e.target.value)}
+            <input
+              value={filter.priceMin}
+              onChange={async (e) =>
+                await inputOnChange("priceMin", e.target.value)
+              }
               type="range"
               min={"0"}
               max={"5000"}
@@ -96,7 +140,7 @@ const ProductList = () => {
             />
           </div>
         </section>
-        <section className="">
+        <section className="flex flex-col justify-center items-center gap-10">
           {productList.length === 0 ? (
             <ProductSkeleton />
           ) : (
@@ -142,6 +186,22 @@ const ProductList = () => {
               })}
             </div>
           )}
+          <div className="flex justify-center items-center lg:mt-8 mt-5">
+                    <ReactPaginate
+                        pageCount={Math.ceil(total.length/2)}
+                        onPageChange={handlePageClick}
+                        previousLabel={'<'}
+                        nextLabel={'>'}
+                        breakLabel={'...'}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        containerClassName={'pagination'}
+                        activeClassName={'active-btn'}
+                        previousClassName={'prev'}
+                        nextClassName={'next'}
+                        pageClassName={'page'}
+                    />
+                </div>
         </section>
       </div>
     </main>

@@ -6,18 +6,17 @@ import { productByKeywordRequest } from '../apiRequest/productRequest';
 
 const ProductByKeywordPage = () => {
     const {keyword} = useParams();
-    
-
+  
     useEffect(()=>{
         (async()=>{
-          await productByKeywordRequest(1,10,keyword);
+          await productByKeywordRequest(1,2,keyword);
         })()
     },[])
 
     return (
-        <div>
+        <>
           <ProductList />  
-        </div>
+        </>
     );
 };
 
