@@ -54,7 +54,7 @@ class sessionHelper {
 
   unauthorized(code) {
     if (code === 401) {
-      Cookies.clear();
+      Cookies.remove("token");
       sessionStorage.clear();
       localStorage.clear();
       window.location.href = "/login";

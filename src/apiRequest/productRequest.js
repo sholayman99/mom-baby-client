@@ -1,7 +1,8 @@
 import axios from "axios";
-import { setCategory, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setSubCategory, setTotal } from "../redux/state-slices/productSlice";
+import { setCategory, setDeatils, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setSubCategory, setTotal } from "../redux/state-slices/productSlice";
 import store from "../redux/store/store";
 import { errorMsg } from "../utility/formHelper";
+import { unauthorized } from "../utility/sessionHelper";
 
 
 export async function categoryListRequest (){
@@ -77,6 +78,19 @@ export async function productByFilterRequest(pageNo,perPage,postBody){
  }
  catch(e){
     errorMsg("Something went wrong!");
+ }
+}
+
+export async function productDetailsRequest(id){
+   try{
+      let res = await axios.get(`/productDetails/${id}`);
+      if(res.status === 200){
+         store.dispatch(setDeatils(res.data['data'][0]));
+      }
+ }
+ catch(e){
+    unauthorized(e.response.status)
+    errorMsg("Unauthorized!");
  }
 }
 

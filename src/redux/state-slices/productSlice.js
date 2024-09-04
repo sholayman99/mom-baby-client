@@ -7,7 +7,8 @@ export const productSlice = createSlice({
     subCategoryList: [],
     remarkProduct: [],
     productList: [],
-    total:[]
+    total: [],
+    details: [],
   },
   reducers: {
     setCategory: (state, action) => {
@@ -25,16 +26,18 @@ export const productSlice = createSlice({
     setProductByKeyword: (state, action) => {
       state.productList = action.payload;
     },
-    setProductByFilter:(state,action)=>{
+    setProductByFilter: (state, action) => {
       state.productList = action.payload;
     },
-    setProductByCategory:(state,action)=>{
+    setProductByCategory: (state, action) => {
       state.productList = action.payload;
     },
-    setTotal:(state,action)=>{
+    setTotal: (state, action) => {
       state.total = action.payload;
-  },
-
+    },
+    setDeatils: (state, action) => {
+      state.details = action.payload;
+    },
   },
 });
 
@@ -46,6 +49,7 @@ export const {
   setProductByKeyword,
   setProductByFilter,
   setTotal,
-  setProductByCategory
+  setProductByCategory,
+  setDeatils,
 } = productSlice.actions;
 export default productSlice.reducer;

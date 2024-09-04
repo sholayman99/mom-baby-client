@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 
 const App = () => {
-  axios.defaults.baseURL = "http://localhost:5000/api/v1";
+  axios.defaults.baseURL = "http://localhost:5080/api/v1";
   axios.defaults.withCredentials = true;
 
   return (

@@ -101,4 +101,39 @@
 .text{
     color: #514f4f;
 }
+
+.image-gallery-image{
+  height: 60vh;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section p{
+  font-size: 17px;
+  color: #717173;
+}
+
+.section h2{
+  font-size: 20px;
+  color: #EF7B84;
+ margin-bottom: 4px;
+}
+
+.section ul{
+  list-style-type: disc;
+  list-style-position: inside;
+  color: #717173;
+  font-size: 17px;
+}
+
+.section ol{
+  list-style-type: decimal;
+  list-style-position: inside;
+  color: #717173;
+  font-size: 17px;
+}
   

@@ -93,7 +93,7 @@ const Products = () => {
                           );
                         }
                         return (
-                          <Link to={"/"}
+                          <Link to={`/details/${item['_id']}`}
                             key={i}
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
@@ -137,12 +137,12 @@ const Products = () => {
                           );
                         }
                         return (
-                          <Link
+                          <Link to={`/details/${item['_id']}`}
                             key={i}
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
                           >
-                            <img className="p-3 " src={item.image} />
+                            <img className="p-3 h-52 w-48 lg:h-72 lg:w-62 " src={item.image} />
                             <div
                               className="bg-secondary/10 w-full flex items-center
                               justify-center flex-col py-4 poppins-regular"
@@ -181,12 +181,12 @@ const Products = () => {
                           );
                         }
                         return (
-                          <Link
+                          <Link to={`/details/${item['_id']}`}
                             key={i}
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
                           >
-                            <img className="p-3 " src={item.image} />
+                            <img className="p-3 h-52 w-48 lg:h-72 lg:w-62 " src={item.image} />
                             <div
                               className="bg-secondary/10 w-full flex items-center
                               justify-center flex-col py-4 poppins-regular"
@@ -225,12 +225,12 @@ const Products = () => {
                           );
                         }
                         return (
-                          <Link
+                          <Link to={`/details/${item['_id']}`}
                             key={i}
                             className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"
                           >
-                            <img className="p-3 " src={item.image} />
+                            <img className="p-3 h-52 w-48 lg:h-72 lg:w-62" src={item.image} />
                             <div
                               className="bg-secondary/10 w-full flex items-center
                               justify-center flex-col py-4 poppins-regular"

@@ -68,7 +68,7 @@ const ProductList = () => {
   }, [filter]);
 
   return (
-    <main className="">
+    <main>
       <div className="flex flex-col lg:flex-row lg:px-5 lg:py-10 p-3 gap-10">
         <section className="grid grid-cols-2 lg:grid-cols-1  gap-5 min-w-[200px]">
           <select
@@ -148,8 +148,7 @@ const ProductList = () => {
               {productList.map((item, i) => {
                 let price = (
                   <p className="text-success my-1 lg:text-lg text-md">
-                    {" "}
-                    ${item["price"]}{" "}
+                    ${item["price"]}
                   </p>
                 );
                 if (item["discount"]) {
@@ -163,7 +162,7 @@ const ProductList = () => {
                   );
                 }
                 return (
-                  <Link
+                  <Link to={`/details/${item['_id']}`}
                     key={i}
                     className="border hover:border hover:border-primary flex items-center
                               justify-center flex-col rounded-md"

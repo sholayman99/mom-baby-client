@@ -58,7 +58,6 @@ export async function loginRequest(email,password){
    let res = await axios.post('/login',postBody);
    store.dispatch(hideLoader());
    if(res['status'] === 200){
-      Cookies.set("token",res.data['data']);
       successMsg("Logged in");
       return true;
    }

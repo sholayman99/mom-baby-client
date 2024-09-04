@@ -7,6 +7,7 @@ import LoginPage from "../pages/LoginPage";
 import VerifyAccount from "../components/Auth/VerifyAccount";
 import ProductByKeywordPage from "../pages/ProductByKeywordPage";
 import ProductByCategoryPage from "../pages/ProductByCategoryPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage";
 
 
 
@@ -37,12 +38,16 @@ const routes = createBrowserRouter([
             element:<VerifyAccount />
            },
            {
-           path:'product-by-keyword/:keyword',
+           path:'/product-by-keyword/:keyword',
            element:<ProductByKeywordPage />
            },
            {
-            path:'product-by-category/:categoryID',
+            path:'/product-by-category/:categoryID',
             element:<ProductByCategoryPage />
+           },
+           {
+            path:'/details/:productID',
+            element:<ProductDetailsPage />
            }
         ]
     }
