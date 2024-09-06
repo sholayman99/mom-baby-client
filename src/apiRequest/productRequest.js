@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setCategory, setDeatils, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setSubCategory, setTotal } from "../redux/state-slices/productSlice";
+import { setAvgRating, setCategory, setDeatils, setProductByCategory, setProductByFilter, setProductByKeyword, setProductList, setRemarkProduct, setReviews, setSubCategory, setTotal } from "../redux/state-slices/productSlice";
 import store from "../redux/store/store";
 import { errorMsg } from "../utility/formHelper";
 import { unauthorized } from "../utility/sessionHelper";
@@ -99,6 +99,31 @@ export async function productByCatgegoryRequest(pageNo,perPage,categoryID){
       let res = await axios.get(`/productByCategory/${pageNo}/${perPage}/${categoryID}`);
       if(res.status === 200){
          store.dispatch(setProductByCategory(res.data['data']));
+      }
+ }
+ catch(e){
+    errorMsg("Something went wrong!");
+ }
+}
+
+
+export async function productReviewRequest(productID){
+   try{
+      let res = await axios.get(`/productReview/${productID}`);
+      if(res.status === 200){
+         store.dispatch(setReviews(res.data['data']));
+      }
+ }
+ catch(e){
+    errorMsg("Something went wrong!");
+ }
+}
+
+export async function avgReviewRequest(productID){
+   try{
+      let res = await axios.get(`/avgProductRating/${productID}`);
+      if(res.status === 200){
+         store.dispatch(setAvgRating(res.data['data'][0]));
       }
  }
  catch(e){

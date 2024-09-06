@@ -9,6 +9,8 @@ export const productSlice = createSlice({
     productList: [],
     total: [],
     details: [],
+    reviews:[],
+    avgRate:[]
   },
   reducers: {
     setCategory: (state, action) => {
@@ -38,6 +40,12 @@ export const productSlice = createSlice({
     setDeatils: (state, action) => {
       state.details = action.payload;
     },
+    setReviews: (state, action) => {
+      state.reviews = action.payload;
+    },
+    setAvgRating:(state, action) => {
+      state.avgRate = action.payload;
+    },
   },
 });
 
@@ -51,5 +59,7 @@ export const {
   setTotal,
   setProductByCategory,
   setDeatils,
+  setReviews,
+  setAvgRating,
 } = productSlice.actions;
 export default productSlice.reducer;

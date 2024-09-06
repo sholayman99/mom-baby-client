@@ -5,10 +5,13 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { IoCartOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import parse from 'html-react-parser';
+import parse from "html-react-parser";
+import StarRatings from "react-star-ratings";
+import ProductDes from "./ProductDes";
 
 const Deatils = () => {
   const data = useSelector((state) => state.products.details);
+  const reviews = useSelector((state) => state.products.reviews);
 
   const images = [
     {
@@ -28,7 +31,7 @@ const Deatils = () => {
   return (
     <main className="lg:p-10 flex flex-col gap-10 items-center justify-center">
       <section className="flex items-start gap-10">
-        <div className="flex-1">
+        <div className="grow">
           <div className=" max-h-[60vh]">
             <ImageGallery items={images} autoplay={true} infinite={true} />
           </div>
@@ -39,7 +42,7 @@ const Deatils = () => {
           </h1>
           <p className="text-accent lg:text-lg">{data?.shortDes}</p>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Effective Price:{" "}
+            Effective Price :{" "}
             {data["discount"] ? (
               <span className="lg:text-2xl text-secondary">
                 ${data["discountPrice"]}{" "}
@@ -52,7 +55,7 @@ const Deatils = () => {
             )}
           </h3>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Size:{" "}
+            Size :{" "}
             {data?.details?.size.split(",").map((item, i) => {
               return (
                 <button className="uppercase focus:border-secondary shadow focus:border-2 border py-1.5 px-3 mr-2 poppins-semibold text-black">
@@ -62,7 +65,7 @@ const Deatils = () => {
             })}
           </h3>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Color:{" "}
+            Color :{" "}
             {data?.details?.color.split(",").map((item, i) => {
               return (
                 <button className="uppercase focus:border-secondary shadow focus:border-2 border py-1.5 px-3 mr-2 poppins-semibold text-black">
@@ -72,19 +75,19 @@ const Deatils = () => {
             })}
           </h3>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Category:{" "}
-            <span className="capitalize poppins-regular text-info text-sm">
+            Category :{" "}
+            <span className="capitalize poppins-regular text-info">
               {data?.category?.categoryName}
             </span>
           </h3>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Sub Category:{" "}
-            <span className="capitalize poppins-regular text-info text-sm">
+            Sub Category :{" "}
+            <span className="capitalize poppins-regular text-info">
               {data?.subCategory?.subCategoryName}
             </span>
           </h3>
           <h3 className="lg:text-md poppins-semibold text-neutral">
-            Availability:{" "}
+            Availability :{" "}
             {data?.stock === true ? (
               <span className="text-green-600 poppins-medium">In Stock</span>
             ) : (
@@ -92,63 +95,18 @@ const Deatils = () => {
             )}
           </h3>
           <div className="flex items-center gap-5">
-            <button className="btn btn-primary hover:btn-secondary text-base-100 hover:text-base-100 rounded-full">
+            <button className="btn btn-secondary hover:btn- text-base-100 hover:text-base-100 rounded-full">
               <IoCartOutline />
               Add to Cart
             </button>
             <button className="btn btn-primary hover:btn-secondary text-base-100 hover:text-base-100  rounded-full">
               <FaRegHeart />
-              Add to Cart
+              Add to Wish
             </button>
           </div>
         </div>
       </section>
-      <div>
-            <TabGroup>
-              <TabList
-                className="flex items-center gap-16 mb-5 justify-center border shadow py-4 w-full"
-              >
-                <Tab
-                  className={
-                    "text-xl text-neutral data-[selected]:poppins-medium data-[selected]:text-secondary data-[selected]:border-secondary p-3 data-[selected]:border-b-2 data-[hover]:text-secondary"
-                  }
-                >
-                  Product Derscription
-                </Tab>
-                <Tab
-                   className={
-                    "text-xl text-neutral data-[selected]:poppins-medium data-[selected]:text-secondary data-[selected]:border-secondary p-3 data-[selected]:border-b-2 data-[hover]:text-secondary"
-                  }
-                >
-                  Reviews
-                </Tab>
-                <Tab
-                   className={
-                    "text-xl text-neutral data-[selected]:poppins-medium data-[selected]:text-secondary data-[selected]:border-secondary p-3 data-[selected]:border-b-2 data-[hover]:text-secondary"
-                  }
-                >
-                  Shipping Details
-                </Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel className="p-3">
-                  {
-                   data?.details?.desc === undefined? <h2>Loaadinggg</h2>:parse(data?.details?.desc)
-                  }
-                </TabPanel>
-                <TabPanel className="p-3">
-                  {
-                   data?.details?.desc === undefined? <h2>Loaadinggg</h2>:parse(data?.details?.desc)
-                  }
-                </TabPanel>
-                <TabPanel className="p-3">
-                  {
-                   data?.details?.desc === undefined? <h2>Loaadinggg</h2>:parse(data?.details?.desc)
-                  }
-                </TabPanel>
-              </TabPanels>
-            </TabGroup>
-          </div>
+     <ProductDes />
     </main>
   );
 };

@@ -1,10 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
-import Slider from "../components/Home/Slider"
-import CategoryList from '../components/Home/CategoryList';
+import Slider from "../components/Product/Slider"
+import CategoryList from '../components/Product/CategoryList';
 import { categoryListRequest, productByRemarkRequest } from '../apiRequest/productRequest';
-import Products from '../components/Home/Products';
-import Feature from '../components/Home/Feature';
+import Products from '../components/Product/Products';
+import Feature from '../components/Feature/Feature';
 import { featureListRequest } from '../apiRequest/featureRequest';
 
 const HomePage = () => {

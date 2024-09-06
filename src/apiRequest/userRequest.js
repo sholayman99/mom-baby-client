@@ -67,7 +67,6 @@ export async function loginRequest(email,password){
    }
   }
   catch(error){
-     console.log(error)
       store.dispatch(hideLoader());
       errorMsg("Something went wrong!!");
       return false;
